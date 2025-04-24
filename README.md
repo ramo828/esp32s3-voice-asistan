@@ -1,61 +1,84 @@
-# [Note] This branch has some modifications to make it work on the Generic board, ESP32-S3-Devkit-C and INMP441 mems microphone.
-  
-## Quick Start with ESP-Skainet for Generic ESP32-S3 DevKit-C 
+# ESP32-S3 Voice Assistant with RGB LED & Buzzer Control
 
-### Pre-requisite
+![Project Banner](https://placehold.co/600x200/EEE/31343C?text=ESP32-S3+Voice+Assistant) <!-- Add your banner here -->
 
-Now this project runs on IDF version 5.x.
+Advanced voice control project for ESP32-S3-DevKit-C with INMP441 MEMS microphone, RGB LED control, and buzzer integration. Built on ESP-Skainet with IDF 5.x.
 
-### ESP-Skainet
+## 🛠 Hardware Setup
 
-Make sure you have cloned my project branch with the '--branch'.
-Also, need to get all submodules so don't forget the option '--recursive'.
+### Components
+- ESP32-S3-DevKit-C
+- INMP441 MEMS Microphone
+- RGB LED (Common Cathode)
+- Passive Buzzer
+- Jumper Wires
 
-```
-git clone --branch ESP32-S3-Devkit-C --recursive git@github.com:0015/esp-skainet.git
-```
+### Connections
+| Component       | ESP32-S3 Pin |
+|-----------------|--------------|
+| INMP441 LRCK    | GPIO 11      |
+| INMP441 SCLK    | GPIO 12      |
+| INMP441 SDIN    | GPIO 10      |
+| Red LED         | GPIO 2       |
+| Green LED       | GPIO 3       |
+| Blue LED        | GPIO 4       |
+| Buzzer          | GPIO 9       |
 
-### Example that can be operated in ESP32-DevKit-C and INMP441 
+![Wiring Diagram](https://placehold.co/600x300/EEE/31343C?text=Wiring+Diagram+Here) <!-- Add your diagram here -->
 
-1. Set your I2s microphone settings 
+## ⚙️ Software Configuration
 
-```
-cd esp-skainet/components/hardware_driver/boards/include
-```
+### 1. Clone Repository
+```bash
+git clone --branch ESP32-S3-Devkit-C --recursive https://github.com/0015/esp-skainet.git
+cd esp-skainet/examples/en_speech_commands_recognition
 
-Open the file, 'esp32_s3_devkit_c.h'
-```
+Edit components/hardware_driver/boards/include/esp32_s3_devkit_c.h
+// I2S Configuration
 #define FUNC_I2S_EN         (1)
 #define GPIO_I2S_LRCK       (GPIO_NUM_11)
-#define GPIO_I2S_MCLK       (GPIO_NUM_NC)
 #define GPIO_I2S_SCLK       (GPIO_NUM_12)
 #define GPIO_I2S_SDIN       (GPIO_NUM_10)
-#define GPIO_I2S_DOUT       (GPIO_NUM_NC)
-``` 
 
-Modify them for your system.
+// LED Configuration
+#define GPIO_LED_RED        (GPIO_NUM_2)
+#define GPIO_LED_GREEN      (GPIO_NUM_3)
+#define GPIO_LED_BLUE       (GPIO_NUM_4)
+#define GPIO_LED_MAIN       (GPIO_NUM_8)  // Built-in LED
 
+// Buzzer Configuration
+#define GPIO_BUZZER         (GPIO_NUM_9)
 
-2. Navigate to one example folder 'esp-skainet/examples/en_speech_commands_recognition'.
-```
-cd ../../../../examples/en_speech_commands_recognition/
-```
-
-3. Set Target and Choose your hardware board
-```
 idf.py set-target esp32s3
 idf.py menuconfig
-```
-Audio hardware board
--> ESP32-S3-DEVKIT-C
 
-4. Build and flash the project.
-```
+🎙 Supported Voice Commands
+Command	Action
+"Turn on the light"	Enable built-in LED
+"Turn off the light"	Disable built-in LED
+"Turn on red light"	Activate red LED
+"Turn off red light"	Deactivate red LED
+"Turn on green light"	Activate green LED
+"Turn off green light"	Deactivate green LED
+"Turn on blue light"	Activate blue LED
+"Turn off blue light"	Deactivate blue LED
+🚀 Build & Flash
 idf.py build
-idf.py flash monitor
-```
-
-5. Advanced users can add or modify speech commands by using the `idf.py menuconfig` command. 
-```
+idf.py -p PORT flash monitor  # Replace PORT with your COM port
+🔧 Customization
 idf.py menuconfig
-```# esp32s3-voice-asistan
+📌 Important Notes
+Ensure proper power supply for multiple LEDs
+
+Buzzer requires PWM configuration
+
+MEMS microphone needs stable mounting
+
+Check GPIO assignments match physical connections
+
+📚 Resources
+ESP-Skainet Documentation
+
+INMP441 Datasheet
+
+ESP32-S3 Pinout
