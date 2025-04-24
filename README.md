@@ -19,9 +19,7 @@ Advanced voice control project for ESP32-S3-DevKit-C with INMP441 MEMS microphon
 | INMP441 LRCK    | GPIO 11      |
 | INMP441 SCLK    | GPIO 12      |
 | INMP441 SDIN    | GPIO 10      |
-| Red LED         | GPIO 2       |
-| Green LED       | GPIO 3       |
-| Blue LED        | GPIO 4       |
+| Strip LED       | GPIO 48      |
 | Buzzer          | GPIO 9       |
 
 ![Wiring Diagram](https://placehold.co/600x300/EEE/31343C?text=Wiring+Diagram+Here) <!-- Add your diagram here -->
