@@ -40,11 +40,8 @@ Edit components/hardware_driver/boards/include/esp32_s3_devkit_c.h
 #define GPIO_I2S_SCLK       (GPIO_NUM_12)
 #define GPIO_I2S_SDIN       (GPIO_NUM_10)
 
-// LED Configuration
-#define GPIO_LED_RED        (GPIO_NUM_2)
-#define GPIO_LED_GREEN      (GPIO_NUM_3)
-#define GPIO_LED_BLUE       (GPIO_NUM_4)
-#define GPIO_LED_MAIN       (GPIO_NUM_8)  // Built-in LED
+#define RGB_STRIP_GPIO        GPIO_NUM_48
+
 
 // Buzzer Configuration
 #define GPIO_BUZZER         (GPIO_NUM_9)
